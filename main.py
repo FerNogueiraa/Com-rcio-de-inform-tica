@@ -1,6 +1,7 @@
 from flask import Flask   
+from models.categoria import db
 from database.db import db   
-from routes import routeIndex
+from routes.routeIndex import routeIndex
 
 
 #Faz a conexão com o banco da dados
@@ -15,4 +16,4 @@ class MyServer():
     
 if __name__ == "__main__":
     app = MyServer() #Inicia o servidor
-    app.run
+    app.run()

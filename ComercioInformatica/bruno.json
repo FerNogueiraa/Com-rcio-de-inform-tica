@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "ComercioInformatica",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

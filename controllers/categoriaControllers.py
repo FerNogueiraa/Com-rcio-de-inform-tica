@@ -3,10 +3,10 @@ from database.db import db
 from models.categoria import Categoria
 
 
-#Irá rodar o pag WEB a fim de exibir o CRUD do banco
-def categoriaHtmlController():
-    if request.method == 'GET':
-         return render_template('*******')
+# #Irá rodar o pag WEB a fim de exibir o CRUD do banco
+# def categoriaHtmlController():
+#     if request.method == 'GET':
+#          return render_template('teste.html')
 
 
 #Essa função contém o CRUD completo da tabela "categoria"
@@ -26,12 +26,12 @@ def categoriaController():
                 return 'A categoria não foi criada {}'.format(str(e)), 405
     
 
-    #O método GET vai puxar todos as informações da tabela "categoria" e exibi-las na pag WEB "*******"
+    #O método GET vai puxar todos as informações da tabela "categoria" e exibi-las na pag WEB "teste.html"
     elif request.method == 'GET':
             try:
                     data = Categoria.query.all()
                     print([categoria.to_dict() for categoria in data])
-                    return render_template('*******', data={'categorias': [categoria.to_dict() for categoria in data]}) #Carregando o site
+                    return render_template(data={'categorias': [categoria.to_dict() for categoria in data]}) #Carregando o site
             except Exception as e:
                 return 'Não foi possível buscar pelas categorias. Error: {}'.format(str(e)), 405
     
@@ -68,4 +68,3 @@ def categoriaController():
              return 'Categoria deletada com sucesso', 200
         except Exception as e: #Mensagem de erro caso não seja possível concluir a ação
               return 'Não foi possível atualizar a categoria. ERRO:{}'.format(str(e)),405
-    

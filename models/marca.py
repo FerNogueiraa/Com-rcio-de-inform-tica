@@ -1,6 +1,6 @@
 from database.db import db
 
-class Marca(db.model):
+class Marca(db.Model):
     def to_dict(self):
         return{
             'codigo': self.codigo,
