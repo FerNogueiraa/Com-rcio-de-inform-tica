@@ -3,10 +3,10 @@ from database.db import db
 from models.marca import Marca
 
 
-# #Irá rodar o pag WEB a fim de exibir o CRUD do banco
-# def marcaHtmlController():
-#     if request.method == 'GET':
-#          return render_template('*******')
+#Irá rodar o pag WEB a fim de exibir o CRUD do banco
+def marcaHtmlController():
+    if request.method == 'GET':
+         return render_template('*******')
 
 
 #Essa função contém o CRUD completo da tabela "marca"

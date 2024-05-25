@@ -6,14 +6,13 @@ from models.categoria import Categoria
 # #Irá rodar o pag WEB a fim de exibir o CRUD do banco
 # def categoriaHtmlController():
 #     if request.method == 'GET':
-#          return render_template('teste.html')
+#          return render_template('clientesHTML.html')
 
 
 #Essa função contém o CRUD completo da tabela "categoria"
 def categoriaController():
 
-
-    #Com o método POST, será possível criar uma categoria com codigo e descrição
+    #Com o método POST, será possível criar uma categoria com codigo e descrição    
     if request.method == 'POST':
             try:
                 data = request.get_json()

@@ -1,0 +1,25 @@
+<!-- Exibe todas as informações do cliente cadastrado -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Página dos Clientes </title>
+</head>
+<body>
+    
+    <script> 
+        //JINJA --> FLASK + JS
+        var data = {{ data.clientes | tojson }} //let é um tipo de variável do js, assim como o const ou var
+        //é para ficar vermelho. não é um erro
+
+        var paragrafos = data.map(function(cliente){
+            return '<p>' + cliente.nome + '</p>';
+        })
+
+        document.body.innerHTML += paragrafos.join('');
+        console.table(data)
+    </script>
+</body>
+</html>
