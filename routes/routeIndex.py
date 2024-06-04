@@ -1,9 +1,9 @@
 #Importação de todos os Routes criados, pois esse é o arquivo que vai gerenciar todos os outros
-from routes.categoriaRoute import categoriaRoutes
-from routes.classificacaoRoute import classificacaoRoutes
-from routes.marcaRoute import marcaRoutes
-from routes.produtoRoute import produtoRoutes
-from routes.usuarioRoute import usuarioRoutes
+from routes.categoriaRoutes import categoriaRoutes
+from routes.classificacaoRoutes import classificacaoRoutes
+from routes.marcaRoutes import marcaRoutes
+from routes.produtoRoutes import produtoRoutes
+from routes.usuarioRoutes import usuarioRoutes
 
 def routeIndex(app):
     categoriaRoutes(app=app)

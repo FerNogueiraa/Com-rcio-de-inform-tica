@@ -3,10 +3,10 @@ from database.db import db
 from models.categoria import Categoria
 
 
-# #Irá rodar o pag WEB a fim de exibir o CRUD do banco
-# def categoriaHtmlController():
-#     if request.method == 'GET':
-#          return render_template('clientesHTML.html')
+#Irá rodar o pag WEB a fim de exibir o CRUD do banco
+def categoriaHtmlController():
+    if request.method == 'GET':
+         return render_template('clientesHTML.html')
 
 
 #Essa função contém o CRUD completo da tabela "categoria"
@@ -17,6 +17,7 @@ def categoriaController():
             try:
                 data = request.get_json()
                 print(data)
+                print("teste")
                 user = Categoria(data['codigo'], data['descricao'])
                 db.session.add(user)
                 db.session.commit()  #mando as informações para o banco de dados

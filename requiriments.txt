@@ -1,3 +1,10 @@
+//1º Criar o venv (python -m venv venv)
+//2º Ativar (venv/Scripts/activate)
+//3º Copiar as bibliotecas da atividade anterior (pip freeze) e colar no requirements.txt
+//4º Instalar as bibliotecas copiadas (pip install -r requirements.txt)
+//5º Iniciar o projeto criando o arquivo main
+
+//Essas são as bibliotecas que serão utizadas no projeto
 blinker==1.7.0
 click==8.1.7 
 colorama==0.4.6
