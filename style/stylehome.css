@@ -1,0 +1,101 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /*background-color: #171810;*/
+    font-family: roboto;
+}
+/*Estilizando Cabeçalho */
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    border: 1px solid red;
+
+}
+.logo{
+    width: 90px;
+    height: 90px;
+    margin-left: 3rem;
+}
+/*Estilizando Lista Nav*/
+.navicons{
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    margin-right: 40px;
+}
+.navicons li{
+    margin: 20px;
+}
+.main-nav a{
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s ease;
+}
+.main-nav a :hover{
+    transform: scale(1.5);            
+}
+.nav{
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    position: absolute;
+    left: 25px;
+    top: 164px;
+    gap: 150px;
+    color: white;
+}
+.nav li{
+    font-size: 22px;
+}
+.search{
+    width: 500px;
+    height: 50px;
+    border: 1px solid #7c0109;
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    padding-left: 10px;
+}
+.material-symbols-outlined{
+    font-size: 30px;
+}
+/*Fim Estilização Header*/
+
+/*Estilizando Main*/
+.slidin{
+    width: 100%;
+}
+
+.filter-container{
+    font-size: 25px;
+    width: 310px;
+    height: 100%;
+}
+
+.filter-price-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.filter-price-container h3{
+    width: 100%;
+    padding-left: 10px;
+}
+
+.filter-price{
+    display: flex;
+    border-bottom: 2px solid #7c0109;
+    flex-direction: column;
+    height: 88px;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+}
+
+
+
