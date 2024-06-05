@@ -1,21 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sessão de Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .products-section {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .products-section h2 {
+            text-align: center;
+            color: #333;
+        }
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px;
+            width: calc(33.333% - 30px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            float: left;
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+        .product-card h3 {
+            color: #333;
+            font-size: 1.2em;
+            margin: 0 0 10px 0;
+        }
+        .product-card p {
+            color: #777;
+            font-size: 0.9em;
+            margin: 0 0 10px 0;
+        }
+        .product-card .price {
+            color: #e67e22;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .product-card button {
+            background-color: #e67e22;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .product-card button:hover {
+            background-color: #d35400;
+        }
+        .clearfix::after {
+            content: "";    
+            display: table;
+            clear: both;
+        }
+    </style>
 </head>
 <body>
-    <div id="container">
-        <p>Pra sumir e aparecer</p>
-    </div>
-    <h1>Teste</h1>
-    <button  onclick="mostra('container')">oi</button>
-    
-    <script>
-        function mostra(el){
-            document.getElementById(el).style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+    <div class="products-section">
+        <h2>Nossos Produtos</h2>
+        <div class="product-card">
+            <img src="https://via.placeholder.com/200" alt="Produto 1">
+            <h3>Produto 1</h3>
+            <p>Descrição breve do Produto 1.</p>
+            <div class="price">R$ 99,99</div>
+            <button>Comprar</button>
+        </div>
+    </div>  
