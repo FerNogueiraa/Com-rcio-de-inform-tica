@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <title>Login</title>
+    <title>Cadastro Categorias</title>
     <style>
         *{
             margin: 0;
@@ -24,6 +24,14 @@
             border-radius: 5px;
             background-color: #a3020d;
             transition: background-color 0.3s ease;
+            animation: inicio 2s forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+        img{
+            animation: inicio 2s forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
         }
         .navButton a:hover {
             background-color: #7c0109;
@@ -40,9 +48,7 @@
             border: 2px solid #a3020d;
             text-align: center;
             width: 350px;
-        }
-        .container h1, h3{
-            color: white;
+            animation: inicio 2s;
         }
         .container .cadastro input[type="text"],
         .container .cadastro input[type="password"] {
@@ -52,6 +58,10 @@
             border-radius: 5px;
             border: 1px solid #a3020d;
             color: white;
+            animation: inicio 2s forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+            
         }
         .container .cadastro input[type="submit"],
         .container .cadastro .button {
@@ -75,33 +85,35 @@
             color: white;
             font: roboto;
         }
-        .Logo{
-            width: 120px;
-            height: 120px;
+        h1{
+            color: white    ;
+        }
+        @keyframes inicio{
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 100;
+            }
         }
         
     </style>
 </head>
 <body>
-
-
-    
     <div class="container">
         <div class="cadastro">
-            <img src="Front end/img/Logo.png" class="Logo">
+            <h1>Categorias</h1>
             <br><br>
-            <form name="formulario" method="post" action="">
-                <input type="text" name="login" id="login" size="20" required class="input" placeholder="Login">
-                <br><br>
-                <input type="password" name="senha" id="senha" size="20" required class="input" placeholder="Senha">
-                <br><br>
-                <a href="home.html"><input type="submit" name="conectar" id="conectar" value="Conectar" class="button"></a>
-                <br><br>
-                <p>Entre com:</p><br>
-                <a href="#"><img src="Front end/Icons/facebook.png" class="Icons"></a>
-                <a href="#"><img src="Front end/Icons/google.png" alt="" class="Icons"></a>
-                <br><br>
-                <a href="cadastro.html" >Cadastro</a>
+            <form name="cadastro" method="post" action="">
+                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código">
+                <br>
+                <input type="text" name="descricao" id="descricao" size="20" required class="input" placeholder="Descrição">
+                <br>
+                <input type="submit" name="gravar" value="Gravar" class="button">
+                <input type="submit" name="excluir" value="Excluir" class="button">
+                <input type="submit" name="alterar" value="Alterar" class="button"><br><br>
+                <input type="submit" name="pesquisar" value="Pesquisar" class="button">
+            
             </form>
         </div>
     </div>
