@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #171810;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            border: 2px solid #a3020d;
+            text-align: center;
+            width: 350px;
+        }
+        .container h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .container a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #a3020d;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .container a:hover {
+            background-color: #7c0109;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cadastro">
+            <h1>Menu Cadastros</h1>
+            <a href="cadastroCategoria.html">Cadastro Categoria</a>
+            <a href="cadastroClassificacao.html">Cadastro Classificação</a>
+            <a href="cadastroMarca.html">Cadastro Marca</a>
+            <a href="cadastroProduto.html">Cadastro Produto</a>
+        </div>
+    </div>
+</body>
+</html>
