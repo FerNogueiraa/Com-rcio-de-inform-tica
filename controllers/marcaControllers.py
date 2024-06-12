@@ -6,14 +6,14 @@ from models.marca import Marca
 #Irá rodar o pag WEB a fim de exibir o CRUD do banco
 def marcaHtmlController():
     if request.method == 'GET':
-         return render_template('*******')
+         return render_template('CRUDMarca.html')
 
 
 #Essa função contém o CRUD completo da tabela "marca"
 def marcaController():
 
-
-    #Com o método POST, será possível criar uma marca com codigo e nome
+    # POST
+    # ----------------------------------------------------------------------------------------------------------------------------------
     if request.method == 'POST':
             try:
                 data = request.get_json()
@@ -26,46 +26,58 @@ def marcaController():
                 return 'Não foi possível criar uma nova marca{}'.format(str(e)), 405
     
 
-    #O método GET vai puxar todos as informações da tabela "marca" e exibi-las na pag WEB "*******"
-    elif request.method == 'GET':
-            try:
-                    data = Marca.query.all()
-                    print([marca.to_dict() for marca in data])
-                    return render_template('*******', data={'marcas': [marca.to_dict() for marca in data]}) #Carregando o site
-            except Exception as e:
-                return 'Não foi possível pesquisar as marcas. Error: {}'.format(str(e)), 405
+
+    # GET
+    # ----------------------------------------------------------------------------------------------------------------------------------
+    # elif request.method == 'GET':
+    #     try:
+    #         data = int(request.args.to_dict().get('codigo'))
+    #         classificacao = Classificacao.query.all(data)
+    #         if classificacao is None:  # Usando 'is' para verificar se a categoria é None
+    #             return {'error': 'Categoria não encontrada'}, 404
+    #         categorias = [{'codigo': categoria.codigo, 'descricao': categoria.descricao} for categoria in data]
+    #         print(categorias)
+    #     except Exception as e:
+    #         return 'Não foi possível buscar pelas categorias. Error: {}'.format(str(e)), 405
     
 
-    #Permite a atualização das informações presentes no banco
+
+    # PUT
+    # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'PUT':
           try:
-              #Incialmente, a marca será localizado pelo seu código
-              data = request.get.json()
-              put_marca_id = data['codigo']
-              marca = Marca.query.get(put_marca_id)
-              if marca in None: #Caso o número seja inválido, um erro é informado
-                  return {'error': 'Marca não encontrada'}, 404
-              #Se não, os campos de codigo e nome são atualizados com novas informações digitadas pelo usuário
-              marca.codigo = data.get('codigo', marca.codigo)
+              id_marca = int(request.args.to_dict().get('codigo'))
+              data = request.get_json()
+              print(id_marca)
+
+              marca = Marca.query.get(id_marca)
+              if marca is None: #Caso o número seja inválido, um erro é informado
+                  return {'error': 'marca não encontrada'}, 404
+              print(data)
+              #Se não, os campos de codigo e descrição são atualizados com novas informações digitadas pelo usuário
               marca.nome = data.get('nome', marca.nome)
               print(marca.codigo, marca.nome)
               db.session.commit() #Finaliza o processo
+              return {
+                   "message": "Marca atualizada com sucesso",
+                   "status": 200
+              }
           except Exception as e:
-              return 'Não foi possível atualizar as marcas. ERRO:{}'.format(str(e)),405
+              return 'Não foi possível atualizar a Marca. ERRO:{}'.format(str(e)),405
 
 
-    #O DELETE é responsável por remover informações do banco
+
+    # DELETE
+    # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'DELETE':
         try:
-             data = request.get.json() 
-             delete_marca_id = data['codigo'] #Vai deletar a marca a partir do codigo informado
-             marca = Marca.query.get(delete_marca_id)
-             if marca in None:
-                  return {'error': 'Marca não encontrada'}, 404 #caso o id seja inválido, um erro é informado
-             #Caso contrário, a ação de delete é executada
-             db.session.delete(marca)
-             db.session.commit()
-             return 'Marca deletada com sucesso', 200
-        except Exception as e: #Mensagem de erro caso não seja possível concluir a ação
-              return 'Não foi possível atualizar a marca. ERRO:{}'.format(str(e)),405
+            data = int(request.args.to_dict().get('codigo'))
+            marca = Marca .query.get(data)
+            if marca is None: 
+                return {'error': 'Classificação não encontrada'}, 404
+            db.session.delete(marca)
+            db.session.commit()
+            return 'Marca deletada com sucesso', 200
+        except Exception as e:
+            return 'Não foi possível deletar a marca. ERRO: {}'.format(str(e)), 405 
         

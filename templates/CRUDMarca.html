@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Marcas</title>
+</head>
+<body>
+    <h1>CRUD Marcas</h1>
+    <input type="text" id="codigo" placeholder="Código" name="codigo"/>
+    <input type="text" id="nome" placeholder="nome" name="nome"/>
+    <br><br>
+    <button id="btnSend">Enviar</button>
+    <button id="btnDelete">Excluir</button>
+    <button id="btnAlterar">Editar</button>
+    <!-- <button id="btnPesquisar">Pesquisar</button> -->
+</body>
+<script>
+
+    
+
+    // ENVIAR
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    function sendUser(){
+        var codigo = document.getElementById('codigo').value;
+        var nome = document.getElementById('nome').value;
+
+        var data = {
+            codigo: codigo,
+            nome: nome,
+        };
+
+        console.log("Dados a serem enviados:", data);
+
+        fetch('http://localhost:3000/marca', {
+            method: 'POST',
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+             body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta da rede.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Marca enviada com sucesso.");
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao enviar a marca.");
+        });
+    }
+
+
+
+    // DELETAR
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    function deleteUser(){
+        var codigo = document.getElementById('codigo').value;
+
+        if (!codigo) {
+            alert("Por favor, insira um código para excluir.");
+            return;
+        }
+
+        fetch(`http://localhost:3000/marca?codigo=${codigo}`, {
+            method: 'DELETE',
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta da rede.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Marca excluída com sucesso.");
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao excluir a marca.");
+        });
+    }
+
+
+    // EDITAR
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    function updateUser(){
+        var codigo = document.getElementById('codigo').value;
+        var nome = document.getElementById('nome').value;
+
+
+        fetch(`http://localhost:3000/marca?codigo=${codigo}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({nome: nome})
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta da rede.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Marca atualizada com sucesso.");
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao atualizar a marca.");
+        });
+    }
+
+
+    // PESQUISAR
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    function searchUser() {
+    var codigo = document.getElementById('codigo').value;
+
+    if (!codigo) {
+        alert("Por favor, insira um código para pesquisar.");
+        return;
+    }
+
+    fetch(`http://localhost:3000/categoria/${codigo}`, { 
+        method: 'GET' 
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        if (data.length > 0) { 
+            document.getElementById('descricao').value = data[0].descricao || ''; 
+            alert("Cliente encontrado com sucesso.");
+        } else {
+            document.getElementById('descricao').value = ''; 
+            alert("Cliente não encontrado.");
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert("Ocorreu um erro ao pesquisar o cliente.");
+    });
+}
+
+
+
+    document.getElementById('btnSend').addEventListener('click', sendUser);
+    document.getElementById('btnDelete').addEventListener('click', deleteUser);
+    document.getElementById('btnAlterar').addEventListener('click', updateUser);
+    document.getElementById('btnPesquisar').addEventListener('click', searchUser);
+</script>
+</html>

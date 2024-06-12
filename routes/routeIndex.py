@@ -6,9 +6,11 @@ from routes.produtoRoutes import produtoRoutes
 from routes.usuarioRoutes import usuarioRoutes
 
 def routeIndex(app):
-    categoriaRoutes(app=app)
-    classificacaoRoutes(app=app)
-    marcaRoutes(app=app)
-    produtoRoutes(app=app)
+    # categoriaRoutes(app=app)
+    # classificacaoRoutes(app=app)
+    # marcaRoutes(app=app)
     usuarioRoutes(app=app)
+    produtoRoutes(app=app)
+
+    
  
