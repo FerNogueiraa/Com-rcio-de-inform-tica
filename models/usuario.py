@@ -13,7 +13,8 @@ class Usuario(db.Model):
     login = db.Column(db.String(100))
     senha = db.Column(db.String(50))
 
-    def __init__(self, nome, login, senha):
+    def __init__(self, codigo, nome, login, senha):
+        self.codigo = codigo
         self.nome = nome
         self.login = login
         self.senha = senha

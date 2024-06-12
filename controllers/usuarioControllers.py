@@ -1,4 +1,4 @@
-from flask import request, render_template #Permite rodar os HTMLs criados, assim exibindo as informações do Banco em uma págine WEB
+from flask import request, render_template, jsonify #Permite rodar os HTMLs criados, assim exibindo as informações do Banco em uma págine WEB
 from database.db import db
 from models.usuario import Usuario
 
@@ -6,14 +6,14 @@ from models.usuario import Usuario
 #Irá rodar o pag WEB a fim de exibir o CRUD do banco
 def usuarioHtmlController():
     if request.method == 'GET':
-         return render_template('*******')
+         return render_template('CRUDUsuario.html')
 
 
 #Essa função contém o CRUD completo da tabela "usuario"
 def usuarioController():
 
-
-    #Com o método POST, será possível criar um usuario com codigo, nome, login e senha
+    # POST
+    # ----------------------------------------------------------------------------------------------------------------------------------
     if request.method == 'POST':
             try:
                 data = request.get_json()
@@ -21,53 +21,74 @@ def usuarioController():
                 user = Usuario(data['codigo'], data['nome'], data['login'], data['senha'])
                 db.session.add(user)
                 db.session.commit()  #manda as informações para o banco de dados
-                return 'Usuário cadastrado com sucesso', 200
+                return 'Marca criada com sucesso', 200
             except Exception as e:
-                return 'Não foi possível criar um novo usuário{}'.format(str(e)), 405
+                return 'Não foi possível criar uma nova marca{}'.format(str(e)), 405
     
 
-    #O método GET vai puxar todos as informações da tabela "usuario" e exibi-las na pag WEB "*******"
+
+    #GET
+    # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'GET':
-            try:
-                    data = Usuario.query.all()
-                    print([usuario.to_dict() for usuario in data])
-                    return render_template('*******', data={'usuarios': [usuario.to_dict() for usuario in data]}) #Carregando o site
-            except Exception as e:
-                return 'Não foi possível pesquisar os usuário cadastrados. Error: {}'.format(str(e)), 405
+        try:
+            codigo = request.args.get('codigo')
+            nome = request.args.get('nome')
+            login = request.args.get('login')
+            senha = request.args.get('senha')
+            query = Usuario.query
+
+            if codigo:
+                query = query.filter_by(codigo=codigo)
+            if nome:
+                query = query.filter(Usuario.nome.like(f"%{nome}%"))
+                query = query.filter(Usuario.login.like(f"%{login}%"))
+                query = query.filter(Usuario.senha.like(f"%{senha}%"))
+
+            usuario = query.all()
+            results = [{'codigo': cat.codigo, 'nome': cat.nome, 'login': cat.login, 'senha': cat.senha} for cat in usuario]
+            return jsonify(results), 200
+        except Exception as e:
+            return 'Erro ao buscar categorias: {}'.format(str(e)), 405
     
 
-    #Permite a atualização das informações presentes no banco
+
+    # PUT
+    # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'PUT':
           try:
-              #Incialmente, o usuário será localizado pelo seu código
-              data = request.get.json()
-              put_usuario_id = data['codigo']
-              usuario = Usuario.query.get(put_usuario_id)
-              if usuario in None: #Caso o número seja inválido, um erro é informado
-                  return {'error': 'Usuário não encontrado'}, 404
-              #Se não, os campos de codigo, nome, login e senha serão atualizados com novas informações digitadas
-              usuario.codigo = data.get('codigo', usuario.codigo)
+              id_usuario = int(request.args.to_dict().get('codigo'))
+              data = request.get_json()
+              print(id_usuario)
+
+              usuario = Usuario.query.get(id_usuario)
+              if usuario is None: #Caso o número seja inválido, um erro é informado
+                  return {'error': 'usuario não encontrada'}, 404
+              print(data)
+              #Se não, os campos de codigo e descrição são atualizados com novas informações digitadas pelo usuário
               usuario.nome = data.get('nome', usuario.nome)
               usuario.login = data.get('login', usuario.login)
               usuario.senha = data.get('senha', usuario.senha)
               print(usuario.codigo, usuario.nome, usuario.login, usuario.senha)
               db.session.commit() #Finaliza o processo
+              return {
+                   "message": "Usuario atualizada com sucesso",
+                   "status": 200
+              }
           except Exception as e:
-              return 'Não foi possível atualizar os usuários cadastrados. ERRO:{}'.format(str(e)),405
+              return 'Não foi possível atualizar a Marca. ERRO:{}'.format(str(e)),405
 
 
-    #O DELETE é responsável por remover informações do banco
+
+    # DELETE
+    # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'DELETE':
         try:
-             data = request.get.json() 
-             delete_usuario_id = data['codigo'] #Vai deletar a usuario a partir do codigo informado
-             usuario = Usuario.query.get(delete_usuario_id)
-             if usuario in None:
-                  return {'error': 'Usuário não encontrado'}, 404 #caso o id seja inválido, um erro é informado
-             #Caso contrário, a ação de delete é executada
-             db.session.delete(usuario)
-             db.session.commit()
-             return 'Cadastro de usuário deletado com sucesso', 200
-        except Exception as e: #Mensagem de erro caso não seja possível concluir a ação
-              return 'Não foi possível atualizar as informações do usuário. ERRO:{}'.format(str(e)),405
-    
+            data = int(request.args.to_dict().get('codigo'))
+            usuario = Usuario .query.get(data)
+            if usuario is None: 
+                return {'error': 'Classificação não encontrada'}, 404
+            db.session.delete(usuario)
+            db.session.commit()
+            return 'usuario deletada com sucesso', 200
+        except Exception as e:
+            return 'Não foi possível deletar a usuario. ERRO: {}'.format(str(e)), 405 

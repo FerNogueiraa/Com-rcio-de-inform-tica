@@ -14,12 +14,13 @@ class Produto(db.Model):
     codigo = db.Column(db.Integer, primary_key = True, unique = True, nullable = False)
     descricao  = db.Column(db.String(100))
     codCategoria  = db.Column(db.Integer)
-    codClassficacao = db.Column(db.Integer)
+    codClassificacao = db.Column(db.Integer)
     codMarca = db.Column(db.Integer)
     preco = db.Column(db.String(50))
     foto1 = db.Column(db.String(1000))
 
-    def __init__(self, descricao, codCategoria, codClassificacao, codMarca, preco, foto1):
+    def __init__(self, codigo, descricao, codCategoria, codClassificacao, codMarca, preco, foto1):
+        self.codigo = codigo
         self.descricao = descricao
         self.codCategoria = codCategoria
         self.codClassificacao = codClassificacao

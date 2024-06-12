@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Classificação</title>
+    <title>CRUD Produtos</title>
 </head>
 <body>
-    <h1>CRUD Classificação</h1>
+    <h1>CRUD Produtos</h1>
     <input type="text" id="codigo" placeholder="Código" name="codigo"/>
-    <input type="text" id="nome" placeholder="nome" name="nome"/>
+    <input type="text" id="descricao" placeholder="descricao" name="descricao"/>
+    <input type="text" id="codCategoria" placeholder="codCategoria" name="codCategoria"/>
+    <input type="text" id="codClassificacao" placeholder="codClassificacao" name="codClassificacao"/>
+    <input type="text" id="codMarca" placeholder="codMarca" name="codMarca"/>
+    <input type="text" id="preco" placeholder="preco" name="preco"/>
+    <input type="text" id="foto1" placeholder="foto1" name="foto1"/>
     <br><br>
     <button id="btnSend">Enviar</button>
     <button id="btnDelete">Excluir</button>
@@ -23,16 +28,26 @@
     // ----------------------------------------------------------------------------------------------------------------------------------
     function sendUser(){
         var codigo = document.getElementById('codigo').value;
-        var nome = document.getElementById('nome').value;
+        var descricao = document.getElementById('descricao').value;
+        var codCategoria = document.getElementById('codCategoria').value;
+        var codClassificacao = document.getElementById('codClassificacao').value;
+        var codMarca = document.getElementById('codMarca').value;
+        var preco = document.getElementById('preco').value;
+        var foto1 = document.getElementById('foto1').value;
 
         var data = {
             codigo: codigo,
-            nome: nome,
+            descricao: descricao,
+            codCategoria: codCategoria,
+            codClassificacao: codClassificacao,
+            codMarca: codMarca,
+            preco: preco,
+            foto1: foto1,
         };
 
         console.log("Dados a serem enviados:", data);
 
-        fetch('http://localhost:3000/classificacao', {
+        fetch('http://localhost:3000/produto', {
             method: 'POST',
             headers:{
                 'Content-Type' : 'application/json'
@@ -47,11 +62,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Classificação enviada com sucesso.");
+            alert("Marca enviada com sucesso.");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao enviar o cliente.");
+            alert("Ocorreu um erro ao enviar a marca.");
         });
     }
 
@@ -67,7 +82,7 @@
             return;
         }
 
-        fetch(`http://localhost:3000/classificacao?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/produto?codigo=${codigo}`, {
             method: 'DELETE',
             headers:{
                 'Content-Type' : 'application/json'
@@ -81,11 +96,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Classificação excluída com sucesso.");
+            alert("Marca excluída com sucesso.");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao excluir a classificação.");
+            alert("Ocorreu um erro ao excluir a marca.");
         });
     }
 
@@ -94,15 +109,20 @@
     // ----------------------------------------------------------------------------------------------------------------------------------
     function updateUser(){
         var codigo = document.getElementById('codigo').value;
-        var nome = document.getElementById('nome').value;
+        var descricao = document.getElementById('descricao').value;
+        var codCategoria = document.getElementById('codCategoria').value;
+        var codClassificacao = document.getElementById('codClassificacao').value;
+        var codMarca = document.getElementById('codMarca').value;
+        var preco = document.getElementById('preco').value;
+        var foto1 = document.getElementById('foto1').value;
 
 
-        fetch(`http://localhost:3000/classificacao?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/produto?codigo=${codigo}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({nome: nome})
+            body: JSON.stringify({descricao: descricao})
         })
         .then(response => {
             if (!response.ok) {
@@ -112,11 +132,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Nome atualizada com sucesso.");
+            alert("Marca atualizada com sucesso.");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao atualizar a descrição.");
+            alert("Ocorreu um erro ao atualizar a marca.");
         });
     }
 
@@ -125,11 +145,21 @@
     // ----------------------------------------------------------------------------------------------------------------------------------
     function searchUser() {
     var codigo = document.getElementById('codigo').value;
-    var nome = document.getElementById('nome').value;
+    var descricao = document.getElementById('descricao').value;
+    var codCategoria = document.getElementById('codCategoria').value;
+    var codClassificacao = document.getElementById('codClassificacao').value;
+    var codMarca = document.getElementById('codMarca').value;
+    var preco = document.getElementById('preco').value;
+    var foto1 = document.getElementById('foto1').value;
 
-    var url = new URL('http://localhost:3000/classificacao');
+    var url = new URL('http://localhost:3000/produto');
     if (codigo) url.searchParams.append('codigo', codigo);
-    if (nome) url.searchParams.append('nome', nome);
+    if (descricao) url.searchParams.append('descricao', descricao);
+    if (codCategoria) url.searchParams.append('codCategoria', codCategoria);
+    if (codClassificacao) url.searchParams.append('codClassificacao', codClassificacao);
+    if (codMarca) url.searchParams.append('codMarca', codMarca);
+    if (preco) url.searchParams.append('preco', preco);
+    if (foto1) url.searchParams.append('foto1', foto1);
 
     fetch(url, {
         method: 'GET',
@@ -152,7 +182,6 @@
         alert("Ocorreu um erro ao buscar as categorias.");
     });
 }
-
 
 
     document.getElementById('btnSend').addEventListener('click', sendUser);

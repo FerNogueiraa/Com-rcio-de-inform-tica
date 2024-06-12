@@ -1,4 +1,4 @@
-from flask import request, render_template #Permite rodar os HTMLs criados, assim exibindo as informações do Banco em uma págine WEB
+from flask import request, render_template, jsonify #Permite rodar os HTMLs criados, assim exibindo as informações do Banco em uma págine WEB
 from database.db import db
 from models.categoria import Categoria
 
@@ -26,18 +26,27 @@ def categoriaController():
                 return 'A categoria não foi criada {}'.format(str(e)), 405
     
 
-    #O método GET vai puxar todos as informações da tabela "categoria" e exibi-las na pag WEB "teste.html"
-    # elif request.method == 'GET':
-    #     try:
-    #         data = int(request.args.to_dict().get('codigo'))
-    #         categoria = Categoria.query.all(data)
-    #         if categoria is None:  # Usando 'is' para verificar se a categoria é None
-    #             return {'error': 'Categoria não encontrada'}, 404
-    #         categorias = [{'codigo': categoria.codigo, 'descricao': categoria.descricao} for categoria in data]
-    #         print(categorias)
-    #     except Exception as e:
-    #         return 'Não foi possível buscar pelas categorias. Error: {}'.format(str(e)), 405
+
+    #GET
+    # ----------------------------------------------------------------------------------------------------------------------------------
+    elif request.method == 'GET':
+        try:
+            codigo = request.args.get('codigo')
+            descricao = request.args.get('descricao')
+            query = Categoria.query
+
+            if codigo:
+                query = query.filter_by(codigo=codigo)
+            if descricao:
+                query = query.filter(Categoria.descricao.like(f"%{descricao}%"))
+
+            categorias = query.all()
+            results = [{'codigo': cat.codigo, 'descricao': cat.descricao} for cat in categorias]
+            return jsonify(results), 200
+        except Exception as e:
+            return 'Erro ao buscar categorias: {}'.format(str(e)), 405
             
+
 
     # PUT
     # ----------------------------------------------------------------------------------------------------------------------------------
@@ -62,6 +71,7 @@ def categoriaController():
               }
           except Exception as e:
               return 'Não foi possível atualizar a categoria. ERRO:{}'.format(str(e)),405
+
 
 
     # DELETE

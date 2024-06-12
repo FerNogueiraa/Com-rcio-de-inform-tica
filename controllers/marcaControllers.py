@@ -1,4 +1,4 @@
-from flask import request, render_template #Permite rodar os HTMLs criados, assim exibindo as informações do Banco em uma págine WEB
+from flask import request, render_template, jsonify#Permite rodar os HTMLs criados, assim exibindo as informações do Banco em uma págine WEB
 from database.db import db
 from models.marca import Marca
 
@@ -27,18 +27,24 @@ def marcaController():
     
 
 
-    # GET
+    #GET
     # ----------------------------------------------------------------------------------------------------------------------------------
-    # elif request.method == 'GET':
-    #     try:
-    #         data = int(request.args.to_dict().get('codigo'))
-    #         classificacao = Classificacao.query.all(data)
-    #         if classificacao is None:  # Usando 'is' para verificar se a categoria é None
-    #             return {'error': 'Categoria não encontrada'}, 404
-    #         categorias = [{'codigo': categoria.codigo, 'descricao': categoria.descricao} for categoria in data]
-    #         print(categorias)
-    #     except Exception as e:
-    #         return 'Não foi possível buscar pelas categorias. Error: {}'.format(str(e)), 405
+    elif request.method == 'GET':
+        try:
+            codigo = request.args.get('codigo')
+            nome = request.args.get('nome')
+            query = Marca.query
+
+            if codigo:
+                query = query.filter_by(codigo=codigo)
+            if nome:
+                query = query.filter(Marca.nome.like(f"%{nome}%"))
+
+            marca = query.all()
+            results = [{'codigo': cat.codigo, 'nome': cat.nome} for cat in marca]
+            return jsonify(results), 200
+        except Exception as e:
+            return 'Erro ao buscar categorias: {}'.format(str(e)), 405
     
 
 

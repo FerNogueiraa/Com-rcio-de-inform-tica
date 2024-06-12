@@ -13,7 +13,7 @@
     <button id="btnSend">Enviar</button>
     <button id="btnDelete">Excluir</button>
     <button id="btnAlterar">Editar</button>
-    <!-- <button id="btnPesquisar">Pesquisar</button> -->
+    <button id="btnPesquisar">Pesquisar</button>
 </body>
 <script>
 
@@ -125,29 +125,31 @@
     // ----------------------------------------------------------------------------------------------------------------------------------
     function searchUser() {
     var codigo = document.getElementById('codigo').value;
+    var nome = document.getElementById('nome').value;
 
-    if (!codigo) {
-        alert("Por favor, insira um código para pesquisar.");
-        return;
-    }
+    var url = new URL('http://localhost:3000/marca');
+    if (codigo) url.searchParams.append('codigo', codigo);
+    if (nome) url.searchParams.append('nome', nome);
 
-    fetch(`http://localhost:3000/categoria/${codigo}`, { 
-        method: 'GET' 
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        if (data.length > 0) { 
-            document.getElementById('descricao').value = data[0].descricao || ''; 
-            alert("Cliente encontrado com sucesso.");
-        } else {
-            document.getElementById('descricao').value = ''; 
-            alert("Cliente não encontrado.");
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
         }
     })
-    .catch(error => {
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na resposta da rede.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        alert("Categorias encontradas: " + JSON.stringify(data));
+    })
+    .catch((error) => {
         console.error('Erro:', error);
-        alert("Ocorreu um erro ao pesquisar o cliente.");
+        alert("Ocorreu um erro ao buscar as categorias.");
     });
 }
 
