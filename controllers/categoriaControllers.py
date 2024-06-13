@@ -6,7 +6,8 @@ from models.categoria import Categoria
 #Irá rodar o pag WEB a fim de exibir o CRUD do banco
 def categoriaHtmlController():
     if request.method == 'GET':
-         return render_template('CRUDCategoria.html')
+         return render_template('FrontEnd/cadastroCategoria.html')
+    return render_template('FrontEnd/cadastroCategoria.html')
 
 
 #Essa função contém o CRUD completo da tabela "categoria"

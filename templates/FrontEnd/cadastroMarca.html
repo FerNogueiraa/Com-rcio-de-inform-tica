@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Danfo&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Cadastro Classificação</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #171810;
+            font-family: roboto;
+        }
+        .button, .navButton a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #a3020d;
+            transition: background-color 0.3s ease;
+            animation: inicio 2s forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+        img{
+            animation: inicio 2s forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+        .navButton a:hover {
+            background-color: #7c0109;
+        }
+        .container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            border-radius: 15px;
+            border: 2px solid #a3020d;
+            text-align: center;
+            width: 350px;
+            animation: inicio 2s;
+        }
+        .container .cadastro input[type="text"],
+        .container .cadastro input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #a3020d;
+            color: white;
+            animation: inicio 2s forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+            
+        }
+        .container .cadastro input[type="submit"],
+        .container .cadastro .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #a3020d;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .container .cadastro input[type="submit"]:hover,
+        .container .cadastro .button:hover {
+            background-color: #7c0109;
+        }
+        .Icons{
+            width: 30px;         
+            height: auto;;
+        }
+        p{
+            color: white;
+            font: roboto;
+        }
+        h1{
+            color: white    ;
+        }
+        @keyframes inicio{
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 100;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cadastro">
+            <h1>Marca</h1>
+            <br><br>
+            <form name="cadastro" method="post" action="">
+                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código">
+                <br>
+                <input type="text" name="nome" id="nome" size="20" required class="input" placeholder="Nome">
+                <br>
+                <input type="submit" name="gravar" value="Gravar" class="button" id="btnSend">
+                <input type="submit" name="excluir" value="Excluir" class="button" id="btnDelete">
+                <input type="submit" name="alterar" value="Alterar" class="button" id="btnAlterar"><br><br>
+                <input type="submit" name="pesquisar" value="Pesquisar" class="button" id="btnPesquisar">
+            
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    // ENVIAR
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    function sendUser(){
+        var codigo = document.getElementById('codigo').value;
+        var nome = document.getElementById('nome').value;
+
+        var data = {
+            codigo: codigo,
+            nome: nome,
+        };
+
+        console.log("Dados a serem enviados:", data);
+
+        fetch('http://localhost:3000/marca', {
+            method: 'POST',
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+             body: JSON.stringify(data)
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Marca cadastrada com sucesso.");
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao enviar");
+        });
+    }
+
+
+
+    // DELETAR
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    function deleteUser(){
+        var codigo = document.getElementById('codigo').value;
+
+        if (!codigo) {
+            alert("Por favor, insira um código para excluir.");
+            return;
+        }
+
+        fetch(`http://localhost:3000/marca?codigo=${codigo}`, {
+            method: 'DELETE',
+            headers:{
+                'Content-Type' : 'application/json'
+            },
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Marca excluída com sucesso");
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao excluir");
+        });
+    }
+
+
+    // EDITAR
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    function updateUser(){
+        var codigo = document.getElementById('codigo').value;
+        var nome = document.getElementById('nome').value;
+
+
+        fetch(`http://localhost:3000/marca?codigo=${codigo}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({nome: nome})
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Marca atualizada com sucesso");
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao atualizar");
+        });
+    }
+
+
+    // PESQUISAR
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    function searchUser() {
+    var codigo = document.getElementById('codigo').value;
+    var nome = document.getElementById('nome').value;
+
+    var url = new URL('http://localhost:3000/marca');
+    if (codigo) url.searchParams.append('codigo', codigo);
+    if (nome) url.searchParams.append('nome', nome);
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro na resposta da rede.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        alert("Categorias encontradas: " + JSON.stringify(data));
+    })
+    .catch((error) => {
+        console.error('Erro:', error);
+        alert("Ocorreu um erro ao pesquisar");
+    });
+}
+
+    document.getElementById('btnSend').addEventListener('click', sendUser);
+    document.getElementById('btnDelete').addEventListener('click', deleteUser);
+    document.getElementById('btnAlterar').addEventListener('click', updateUser);
+    document.getElementById('btnPesquisar').addEventListener('click', searchUser);
+</script>

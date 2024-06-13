@@ -6,7 +6,8 @@ from models.marca import Marca
 #Irá rodar o pag WEB a fim de exibir o CRUD do banco
 def marcaHtmlController():
     if request.method == 'GET':
-         return render_template('CRUDMarca.html')
+         return render_template('FrontEnd/cadastroMarca.html')
+    return render_template('FrontEnd/cadastroMarca.html')
 
 
 #Essa função contém o CRUD completo da tabela "marca"

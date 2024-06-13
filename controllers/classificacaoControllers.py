@@ -6,7 +6,8 @@ from models.classificacao import Classificacao
 #Irá rodar o pag WEB a fim de exibir o CRUD do banco
 def classificacaoHtmlController():
     if request.method == 'GET':
-         return render_template('CRUDClassificacao.html')
+         return render_template('FrontEnd/cadastroClassificacao.html')
+    return render_template('FrontEnd/cadastroClassificacao.html')
 
 
 #Essa função contém o CRUD completo da tabela "classificacao"

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style/stylehome.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #171810;
+    font-family: poppins;
+}
+/*Estilizando Cabeçalho */
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+
+}
+
+.positiondiv{
+    display: flex;
+    height: 100%;
+}
+
+.logo{
+    width: 90px;
+    height: 90px;
+    margin-left: 3rem;
+}
+/*Estilizando Lista Nav*/
+.navicons{
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    margin-right: 40px;
+}
+.navicons li{
+    margin: 20px;
+}
+.main-nav a{
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s ease;
+}
+.main-nav a :hover{
+    color: #7c0109;
+    transform: scale(1.5);            
+}
+.search{
+    width: 500px;
+    height: 50px;
+    border: 1px solid #7c0109;
+    border-radius: 10px;
+    font-size: 20px;
+    color: white;
+    padding-left: 10px;
+}
+.material-symbols-outlined{
+    font-size: 30px;
+}
+/*Fim Estilização Header*/
+
+/*Estilizando Main*/
+
+.filter-container{
+    border-right: 2px solid #7c0109;
+    margin-top: 30px;
+    height: 100%;
+}
+
+/*Inicio estilo Filtros pesquisa*/
+.slidin{
+    width: 100%;
+}
+
+.filter-container{
+    font-size: 25px;
+    width: 310px;
+    height: 100%;
+}
+
+.filter-price-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    cursor: pointer;
+    color: white;
+}
+.filter-price-container h4{
+    width: 100%;
+    padding-left: 10px;
+    color: #7c0109;
+}
+
+.filter-price {
+    display: flex;
+    border-bottom: 2px solid #7c0109;
+    flex-direction: column;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+}
+.filter-price input{
+    color: white;
+    border: 1px solid #7c0109;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+
+
+.filter-category-container, .filter-brand-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.filter-category-container h4, .filter-brand-container h4{
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 4px;
+    color: #7c0109;
+
+}
+
+.filter-category{
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 160px;
+    border-bottom: 2px solid #7c0109;
+    padding-left: 10px;
+}
+.filter-category ul, .filter-brand ul{
+    list-style-type: none;
+    font-size: 20px;
+}
+
+.filter-brand{
+    display: flex;
+    border-bottom: 2px solid #7c0109;
+    flex-direction: column;
+    height: 170px;
+    justify-content: center;
+    width: 250px;
+    cursor: pointer;
+    padding-left: 10px;
+}
+/*Fim Filtro Pesquisa*/
+
+/*Inicio Card produtos*/
+.products-section{
+    padding: 10px;
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+}
+
+.product-card{
+    width: 300px;
+    height: 501px;
+    display: flex;
+    flex-direction: column;
+    color: white;   
+    cursor: pointer;
+}
+.product-card .price{
+    color: green;
+    font-size: 20px;
+}
+.product-card .material-symbols-outlined{
+    opacity: 0;
+    color: red;
+    position: relative;
+    background-color: white;
+    top: -285px;
+    left: 250px;
+    width: 30px;
+}
+.product-card img{
+    width: 300px;
+    height: 300px;
+}
+
+.product-card:hover .material-symbols-outlined{
+
+    animation: like 100s forwards ;
+}
+
+@keyframes like {
+    to{
+        opacity: 0;
+    }
+    from{
+        opacity: 1;
+    }
+    
+}
+
+.product-card img{
+   width: 306;
+   height: 306;
+   border-radius: 15px;
+}
+
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <img src="Front end/img/Logo.png" class="logo">
+        <input type="text" name="search" id="search" size="20" class="search" placeholder="Digite o que você procura...">
+        <nav class="main-nav">
+            <ul class="navicons">
+                <li><a href="login.html"><span class="material-symbols-outlined">login</span></a></li>
+                <li><a href="home.html"><span class="material-symbols-outlined">home</span></a></li>
+                <li><a href=""><span class="material-symbols-outlined">favorite</span></a></li>
+                <li><a href=""><span class="material-symbols-outlined">shopping_cart</span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <img src="Front end/img/promocao.png" class="slidin">
+        <div class="positiondiv">
+            <div class="filter-container">
+                <!-- Começo filtro preço-->
+                <div class="filter-price-container" id="containerteste">
+                    <h4 onclick="some('filter-price')">Preço</h4>
+                    <div  id="filter-price" class="filter-price"> 
+                        <div>
+                            <span>Min</span>
+                            <input type="number" id="priceMin" class="price-number" value="0">
+                        </div>
+                        <div>
+                            <span>Max</span>
+                            <input type="number" id="priceMax" class="price-number">
+                        </div>
+                    </div>
+                </div>
+                <!--Começo Filtro categoria-->
+                <div class="filter-category-container" id="containerteste1">
+                    <h4 onclick="some('filter-category')">Categoria</h4>
+                    <div id="filter-category" class="filter-category">
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="mouse">
+                                Mouse</li>
+                            <li><input type="checkbox" id="teclado">
+                                Teclado</li>
+                            <li><input type="checkbox" id="Monitor">
+                                Monitor</li>
+                            <li><input type="checkbox" id="headset">
+                                Headset</li>
+                            <li><input type="checkbox" id="gabinete">
+                                Gabinete</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--Começo filtro Marca-->
+                <div class="filter-brand-container" id="containerteste2">
+                    <h4 onclick="some('filter-brand')">Marca</h4>
+                    <div  id="filter-brand" class="filter-brand">
+                        <ul class="checklist">
+                            <li><input type="checkbox" id="redragon">
+                                Redragon</li>
+                            <li><input type="checkbox" id="razer">
+                                Razer</li>
+                            <li><input type="checkbox" id="corsair">
+                                Corsair</li>
+                            <li><input type="checkbox" id="asus">
+                                Asus</li>
+                            <li><input type="checkbox" id="gabinete">
+                                Gabinete</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="products-section">
+                <div class="product-card">
+                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Cadeira Gamer</h3>
+                    <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
+                    <p class="price">R$ 999,99</p>
+                </div> 
+                <div class="product-card">
+                    <img src="Front end/produto/monitor gamer.jpg" alt="">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Monitor Gamer Sansung</h3>
+                    <p>Monitor Gamer 144hz 16k de resolução pra ver tudo</p><br>
+                    <p class="price">R$ 4500,01</p>
+                </div>
+                <div class="product-card">
+                    <img src="Front end/produto/headset corsair.jpg" alt="">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Headset Gamer Corsair</h3>
+                    <p>Headset gamer para poder escutar tudo, até sua mãe no quarto peidando</p><br>
+                    <p class="price">R$ 3888,99</p>
+                </div>
+                <div class="product-card">
+                    <img src="Front end/produto/mouse razer.png" alt="" style="background-color: white;">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Mouse Gamer Razer</h3>
+                    <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
+                    <p class="price">R$ 999,99</p>
+                </div>
+                <div class="product-card">
+                    <img src="Front end/produto/mousepad logitec.jpg" alt="">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Mousepad Logitech</h3>
+                    <p>Mousepad Logitech para arrasta ate o dedo no cu nele</p><br>
+                    <p class="price">R$ 200,00</p>
+                </div>
+                <div class="product-card">
+                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Cadeira Gamer</h3>
+                    <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
+                    <p class="price">R$ 999,99</p>
+                </div>
+                <div class="product-card">
+                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Cadeira Gamer</h3>
+                    <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
+                    <p class="price">R$ 999,99</p>
+                </div>
+                <div class="product-card">
+                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Cadeira Gamer</h3>
+                    <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
+                    <p class="price">R$ 999,99</p>
+                </div>
+                <div class="product-card">
+                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <span class="material-symbols-outlined">heart_plus</span>
+                    <h3>Cadeira Gamer</h3>
+                    <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
+                    <p class="price">R$ 999,99</p>
+                </div>
+
+            </div>  
+        </div>
+
+        <script>function some(el) {
+            var btn = document.getElementById(el);
+            var border = document.getElementById("containerteste");
+            var border1 = document.getElementById("containerteste1");
+            var border2 = document.getElementById("containerteste2");
+            var computedStyle = window.getComputedStyle(btn); // Obter o estilo computado
+        
+            if (computedStyle.display === 'none') {
+                btn.style.display = 'block'; // Use block em vez de flex para elementos de bloco
+                border.style.borderBottom = '0px';
+                border1.style.borderBottom = '0px';
+                border2.style.borderBottom = '0px';
+            } else {
+                btn.style.display = 'none';
+                border.style.borderBottom = '2px solid #7c0109';
+                border1.style.borderBottom = '2px solid #7c0109';
+                border2.style.borderBottom = '2px solid #7c0109';
+            }
+        }</script>
+
+    </main>
+    
+
+
+</body>
+</html>
