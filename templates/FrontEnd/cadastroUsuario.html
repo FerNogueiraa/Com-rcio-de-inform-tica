@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <title>Login</title>
+    <title>Cadastro Usuário</title>
     <style>
         *{
             margin: 0;
@@ -106,15 +106,14 @@
             <img src="Front end/img/Logo.png" class="Logo">
             <br><br>
             <form name="cadastro" method="post" action="">
-                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código">
-                <br>
-                <input type="text" name="nome" id="nome" size="20" required class="input" placeholder="Nome">
-                <br>
-                <input type="text" name="login" id="login" size="20" required class="input" placeholder="Login">
-                <br>
-                <input type="password" name="senha" id="senha" size="20" required class="input" placeholder="Senha">
-                <br><br>
-                <input type="submit" name="cadastrar" id="cadastrar" value="Cadastrar" class="button">
+                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código"><br>
+                <input type="text" name="nome" id="nome" size="20" required class="input" placeholder="Nome"><br>
+                <input type="text" name="login" id="login" size="20" required class="input" placeholder="Login"><br>
+                <input type="password" name="senha" id="senha" size="20" required class="input" placeholder="Senha"><br><br>
+                <input type="submit" name="gravar" value="Gravar" class="button" id="btnSend">
+                <input type="submit" name="excluir" value="Excluir" class="button" id="btnDelete">
+                <input type="submit" name="alterar" value="Alterar" class="button" id="btnAlterar"><br><br>
+                <input type="submit" name="pesquisar" value="Pesquisar" class="button" id="btnPesquisar">
             
             </form>
         </div>

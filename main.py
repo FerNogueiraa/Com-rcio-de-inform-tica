@@ -8,6 +8,7 @@ class MyServer():
     def __init__(self):
         self.app = Flask(__name__)
         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:''@localhost/comercioonline' #Caminho para localizar o banco
+        self.app.config['SECRET_KEY'] = 'your_secret_key'
         db.init_app(self.app)
         routeIndex(self.app)
 

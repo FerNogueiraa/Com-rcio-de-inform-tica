@@ -6,8 +6,8 @@ from models.usuario import Usuario
 #Irá rodar o pag WEB a fim de exibir o CRUD do banco
 def usuarioHtmlController():
     if request.method == 'GET':
-         return render_template('FrontEnd/cadastroUsuario')
-    return render_template('FrontEnd/cadastroUsuario')
+         return render_template('FrontEnd/cadastroUsuario.html')
+    return render_template('FrontEnd/cadastroUsuario.html')
 
 
 #Essa função contém o CRUD completo da tabela "usuario"

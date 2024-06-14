@@ -6,7 +6,8 @@ from models.produto import Produto
 #Irá rodar o pag WEB a fim de exibir o CRUD do banco
 def produtoHtmlController():
     if request.method == 'GET':
-         return render_template('TesteCRUDS/CRUDProduto.html')
+         return render_template('FrontEnd/cadastroProduto.html')
+    return render_template('FrontEnd/cadastroProduto.html')
 
 
 #Essa função contém o CRUD completo da tabela "produto"
