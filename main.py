@@ -18,7 +18,3 @@ class MyServer():
 if __name__ == "__main__":
     app = MyServer() #Inicia o servidor
     app.run()
-
-
-
-    

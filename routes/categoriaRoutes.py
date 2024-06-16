@@ -5,7 +5,6 @@ from controllers.categoriaControllers import categoriaHtmlController
 #Método POST: manda informações para dentro do Banco, podendo criar ou modificar tabelas
 def categoriaRoutes(app):
     app.route('/categoria',  methods=['POST', 'GET', 'DELETE', 'PUT'])(categoriaHtmlController)
-    app.route('/categoria', methods=['POST', 'GET', 'DELETE', 'PUT'])(categoriaController)
+    app.route('/api/categoria', methods=['POST', 'GET', 'DELETE', 'PUT'])(categoriaController)
 
-    #Aqui, dependendo do método citado, a função "categoriaRoutes" irá exibir/modificar o Banco
 

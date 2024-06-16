@@ -105,15 +105,13 @@
             <h1>Classificação</h1>
             <br><br>
             <form name="cadastro" method="post" action="">
-                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código">
-                <br>
-                <input type="text" name="nome" id="nome" size="20" required class="input" placeholder="Nome">
-                <br>
+                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código"><br>
+                <input type="text" name="nome" id="nome" size="20" required class="input" placeholder="Nome"><br>
+                
                 <input type="submit" name="gravar" value="Gravar" class="button" id="btnSend">
                 <input type="submit" name="excluir" value="Excluir" class="button" id="btnDelete">
                 <input type="submit" name="alterar" value="Alterar" class="button" id="btnAlterar"><br><br>
                 <input type="submit" name="pesquisar" value="Pesquisar" class="button" id="btnPesquisar">
-            
             </form>
         </div>
     </div>
@@ -135,7 +133,7 @@
 
         console.log("Dados a serem enviados:", data);
 
-        fetch('http://localhost:3000/classificacao', {
+        fetch('http://localhost:3000/api/classificacao', {
             method: 'POST',
             headers:{
                 'Content-Type' : 'application/json'
@@ -144,11 +142,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Classificação cadastrada com sucesso.");
+            alert("Classificação cadastrada com sucesso");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao enviar o cliente.");
+            alert("Ocorreu um erro ao enviar");
         });
     }
 
@@ -164,7 +162,7 @@
             return;
         }
 
-        fetch(`http://localhost:3000/classificacao?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/classificacao?codigo=${codigo}`, {
             method: 'DELETE',
             headers:{
                 'Content-Type' : 'application/json'
@@ -176,7 +174,7 @@
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao excluir a classificação.");
+            alert("Ocorreu um erro ao excluir");
         });
     }
 
@@ -188,7 +186,7 @@
         var nome = document.getElementById('nome').value;
 
 
-        fetch(`http://localhost:3000/classificacao?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/classificacao?codigo=${codigo}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -197,11 +195,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Nome do produto atualizado com sucesso.");
+            alert("Nome do produto atualizado com sucesso");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao atualizar o nome do produto.");
+            alert("Ocorreu um erro ao atualizar o nome do produto");
         });
     }
 
@@ -212,7 +210,7 @@
     var codigo = document.getElementById('codigo').value;
     var nome = document.getElementById('nome').value;
 
-    var url = new URL('http://localhost:3000/classificacao');
+    var url = new URL('http://localhost:3000/api/classificacao');
     if (codigo) url.searchParams.append('codigo', codigo);
     if (nome) url.searchParams.append('nome', nome);
 
@@ -230,11 +228,13 @@
     })
     .then(data => {
         console.log('Success:', data);
-        alert("Categorias encontradas: " + JSON.stringify(data));
+        alert("Classificações cadastradas: \n" + JSON.stringify(data)
+        .replace(/[{}[\]"]/g, '')
+        .replace(/,/g, '\n'));
     })
     .catch((error) => {
         console.error('Erro:', error);
-        alert("Ocorreu um erro ao pesquisar.");
+        alert("Ocorreu um erro ao pesquisar");
     });
 }
 

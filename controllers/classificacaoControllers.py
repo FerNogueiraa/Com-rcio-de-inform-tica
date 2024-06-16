@@ -27,7 +27,6 @@ def classificacaoController():
                 return 'Não foi possível criar uma nova classificação{}'.format(str(e)), 405
     
 
-
     #GET
     # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'GET':
@@ -45,24 +44,21 @@ def classificacaoController():
             results = [{'codigo': cat.codigo, 'nome': cat.nome} for cat in classificacao]
             return jsonify(results), 200
         except Exception as e:
-            return 'Erro ao buscar categorias: {}'.format(str(e)), 405
+            return 'Erro ao buscar pelas classificações: {}'.format(str(e)), 405
     
-
 
     # PUT
     # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'PUT':
           try:
-              #Incialmente, a categoria será localizado pelo seu código
               id_classificacao = int(request.args.to_dict().get('codigo'))
               data = request.get_json()
               print(id_classificacao)
 
               classificacao = Classificacao.query.get(id_classificacao)
               if classificacao is None: #Caso o número seja inválido, um erro é informado
-                  return {'error': 'Categoria não encontrada'}, 404
+                  return {'error': 'Classificação não encontrada'}, 404
               print(data)
-              #Se não, os campos de codigo e descrição são atualizados com novas informações digitadas pelo usuário
               classificacao.nome = data.get('nome', classificacao.nome)
               print(classificacao.codigo, classificacao.nome)
               db.session.commit() #Finaliza o processo
@@ -72,7 +68,6 @@ def classificacaoController():
               }
           except Exception as e:
               return 'Não foi possível atualizar a classificação. ERRO:{}'.format(str(e)),405
-
 
 
     # DELETE

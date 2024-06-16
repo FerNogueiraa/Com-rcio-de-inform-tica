@@ -27,5 +27,3 @@ class Produto(db.Model):
         self.codMarca = codMarca
         self.preco = preco
         self.foto1 = foto1
-
-    

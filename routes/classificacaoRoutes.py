@@ -5,4 +5,4 @@ from controllers.classificacaoControllers import classificacaoHtmlController
 #Método POST: manda informações para dentro do Banco, podendo criar ou modificar tabelas
 def classificacaoRoutes(app):
     app.route('/classificacao', methods=['POST', 'GET', 'DELETE', 'PUT'])(classificacaoHtmlController)
-    app.route('/classificacao', methods=['POST', 'GET', 'DELETE', 'PUT'])(classificacaoController)
+    app.route('/api/classificacao', methods=['POST', 'GET', 'DELETE', 'PUT'])(classificacaoController)

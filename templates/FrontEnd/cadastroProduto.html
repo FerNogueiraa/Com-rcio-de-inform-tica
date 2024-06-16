@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Danfo&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Danfo&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <title>Cadastro Produto</title>
     <style>
         *{
@@ -61,7 +61,6 @@
             animation: inicio 2s forwards;
             animation-delay: 0.5s;
             opacity: 0;
-            
         }
         .container .cadastro input[type="submit"],
         .container .cadastro .button {
@@ -96,7 +95,6 @@
                 opacity: 100;
             }
         }
-        
     </style>
 </head>
 <body>
@@ -111,7 +109,7 @@
                 <input type="text" name="codclassificacao" id="codclassificacao" size="20" required class="input" placeholder="Cod Classificação"><br>
                 <input type="text" name="codmarca" id="codmarca" size="20" required class="input" placeholder="Cod Marca"><br>
                 <input type="text" name="preco" id="preco" size="20" required class="input" placeholder="Preço"><br>
-                <input type="text" name="foto1" id="foto1" size="20" required class="input" placeholder="Imagem do Produto"><br><br>
+                <input type="file" name="foto1" id="foto1" size="20" required class="input" placeholder="Imagem do Produto"><br><br>
 
                 <input type="submit" name="gravar" value="Gravar" class="button" id="btnSend">
                 <input type="submit" name="excluir" value="Excluir" class="button" id="btnDelete">
@@ -130,9 +128,9 @@
     function sendUser(){
         var codigo = document.getElementById('codigo').value;
         var descricao = document.getElementById('descricao').value;
-        var codCategoria = document.getElementById('codCategoria').value;
-        var codClassificacao = document.getElementById('codClassificacao').value;
-        var codMarca = document.getElementById('codMarca').value;
+        var codCategoria = document.getElementById('codcategoria').value;
+        var codClassificacao = document.getElementById('codclassificacao').value;
+        var codMarca = document.getElementById('codmarca').value;
         var preco = document.getElementById('preco').value;
         var foto1 = document.getElementById('foto1').value;
 
@@ -148,7 +146,7 @@
 
         console.log("Dados a serem enviados:", data);
 
-        fetch('http://localhost:3000/produto', {
+        fetch('http://localhost:3000/api/produto', {
             method: 'POST',
             headers:{
                 'Content-Type' : 'application/json'
@@ -163,11 +161,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Marca enviada com sucesso.");
+            alert("Produto cadastrado com sucesso.");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao enviar a marca.");
+            alert("Ocorreu um erro ao enviar");
         });
     }
 
@@ -182,7 +180,7 @@
             return;
         }
 
-        fetch(`http://localhost:3000/produto?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/produto?codigo=${codigo}`, {
             method: 'DELETE',
             headers:{
                 'Content-Type' : 'application/json'
@@ -196,11 +194,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Marca excluída com sucesso.");
+            alert("Produto excluído com sucesso.");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao excluir a marca.");
+            alert("Ocorreu um erro ao excluir");
         });
     }
 
@@ -210,19 +208,26 @@
     function updateUser(){
         var codigo = document.getElementById('codigo').value;
         var descricao = document.getElementById('descricao').value;
-        var codCategoria = document.getElementById('codCategoria').value;
-        var codClassificacao = document.getElementById('codClassificacao').value;
-        var codMarca = document.getElementById('codMarca').value;
+        var codCategoria = document.getElementById('codcategoria').value;
+        var codClassificacao = document.getElementById('codclassificacao').value;
+        var codMarca = document.getElementById('codmarca').value;
         var preco = document.getElementById('preco').value;
         var foto1 = document.getElementById('foto1').value;
 
 
-        fetch(`http://localhost:3000/produto?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/produto?codigo=${codigo}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({descricao: descricao})
+            body: JSON.stringify({
+                descricao: descricao,
+                codCategoria: codCategoria,
+                codClassificacao: codClassificacao,
+                codMarca: codMarca,
+                preco: preco,
+                foto1: foto1
+            })
         })
         .then(response => {
             if (!response.ok) {
@@ -232,11 +237,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Marca atualizada com sucesso.");
+            alert("Produto atualizado com sucesso.");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao atualizar a marca.");
+            alert("Ocorreu um erro ao atualizar");
         });
     }
 
@@ -244,44 +249,46 @@
     // PESQUISAR
     // ----------------------------------------------------------------------------------------------------------------------------------
     function searchUser() {
-    var codigo = document.getElementById('codigo').value;
-    var descricao = document.getElementById('descricao').value;
-    var codCategoria = document.getElementById('codCategoria').value;
-    var codClassificacao = document.getElementById('codClassificacao').value;
-    var codMarca = document.getElementById('codMarca').value;
-    var preco = document.getElementById('preco').value;
-    var foto1 = document.getElementById('foto1').value;
+        var codigo = document.getElementById('codigo').value;
+        var descricao = document.getElementById('descricao').value;
+        var codCategoria = document.getElementById('codcategoria').value;
+        var codClassificacao = document.getElementById('codclassificacao').value;
+        var codMarca = document.getElementById('codmarca').value;
+        var preco = document.getElementById('preco').value;
+        var foto1 = document.getElementById('foto1').value;
 
-    var url = new URL('http://localhost:3000/produto');
-    if (codigo) url.searchParams.append('codigo', codigo);
-    if (descricao) url.searchParams.append('descricao', descricao);
-    if (codCategoria) url.searchParams.append('codCategoria', codCategoria);
-    if (codClassificacao) url.searchParams.append('codClassificacao', codClassificacao);
-    if (codMarca) url.searchParams.append('codMarca', codMarca);
-    if (preco) url.searchParams.append('preco', preco);
-    if (foto1) url.searchParams.append('foto1', foto1);
+        var url = new URL('http://localhost:3000/api/produto');
+        if (codigo) url.searchParams.append('codigo', codigo);
+        if (descricao) url.searchParams.append('descricao', descricao);
+        if (codCategoria) url.searchParams.append('codCategoria', codCategoria);
+        if (codClassificacao) url.searchParams.append('codClassificacao', codClassificacao);
+        if (codMarca) url.searchParams.append('codMarca', codMarca);
+        if (preco) url.searchParams.append('preco', preco);
+        if (foto1) url.searchParams.append('foto1', foto1);
 
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro na resposta da rede.');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Success:', data);
-        alert("Categorias encontradas: " + JSON.stringify(data));
-    })
-    .catch((error) => {
-        console.error('Erro:', error);
-        alert("Ocorreu um erro ao buscar as categorias.");
-    });
-}
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta da rede.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Produtos cadastrados: \n" + JSON.stringify(data)
+            .replace(/[{}[\]"]/g, '')
+            .replace(/,/g, '\n'));
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro ao buscar");
+        });
+    }
 
     document.getElementById('btnSend').addEventListener('click', sendUser);
     document.getElementById('btnDelete').addEventListener('click', deleteUser);

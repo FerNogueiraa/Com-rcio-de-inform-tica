@@ -5,4 +5,4 @@ from controllers.produtoController import produtoHtmlController
 #Método POST: manda informações para dentro do Banco, podendo criar ou modificar tabelas
 def produtoRoutes(app):
     app.route('/produto', methods=['POST', 'GET', 'DELETE', 'PUT'])(produtoHtmlController)
-    app.route('/produto', methods=['POST', 'GET', 'DELETE', 'PUT'])(produtoController)
+    app.route('/api/produto', methods=['POST', 'GET', 'DELETE', 'PUT'])(produtoController)

@@ -103,18 +103,18 @@
 <body>
     <div class="container">
         <div class="cadastro">
-            <img src="Front end/img/Logo.png" class="Logo">
+            <img src="{{ url_for('static', filename='front end/img/Logo.png') }}" class="Logo">
             <br><br>
             <form name="cadastro" method="post" action="">
                 <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código"><br>
                 <input type="text" name="nome" id="nome" size="20" required class="input" placeholder="Nome"><br>
                 <input type="text" name="login" id="login" size="20" required class="input" placeholder="Login"><br>
                 <input type="password" name="senha" id="senha" size="20" required class="input" placeholder="Senha"><br><br>
+
                 <input type="submit" name="gravar" value="Gravar" class="button" id="btnSend">
                 <input type="submit" name="excluir" value="Excluir" class="button" id="btnDelete">
                 <input type="submit" name="alterar" value="Alterar" class="button" id="btnAlterar"><br><br>
                 <input type="submit" name="pesquisar" value="Pesquisar" class="button" id="btnPesquisar">
-            
             </form>
         </div>
     </div>
@@ -140,7 +140,7 @@
 
         console.log("Dados a serem enviados:", data);
 
-        fetch('http://localhost:3000/usuario', {
+        fetch('http://localhost:3000/api/usuario', {
             method: 'POST',
             headers:{
                 'Content-Type' : 'application/json'
@@ -155,11 +155,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Marca enviada com sucesso.");
+            alert("Usuário enviado com sucesso.");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao enviar a marca.");
+            alert("Ocorreu um erro ao enviar");
         });
     }
 
@@ -175,7 +175,7 @@
             return;
         }
 
-        fetch(`http://localhost:3000/usuario?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/usuario?codigo=${codigo}`, {
             method: 'DELETE',
             headers:{
                 'Content-Type' : 'application/json'
@@ -189,11 +189,11 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("usuario excluída com sucesso.");
+            alert("Usuário excluído com sucesso.");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao excluir a usuario.");
+            alert("Ocorreu um erro ao excluir");
         });
     }
 
@@ -206,13 +206,19 @@
         var login = document.getElementById('login').value;
         var senha = document.getElementById('senha').value;
 
+        var data = {
+            nome: nome,
+            login: login,
+            senha: senha
+        };
 
-        fetch(`http://localhost:3000/usuario?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/usuario?codigo=${codigo}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({nome: nome})
+            body: JSON.stringify(data)
+            
         })
         .then(response => {
             if (!response.ok) {
@@ -222,14 +228,13 @@
         })
         .then(data => {
             console.log('Success:', data);
-            alert("Marca atualizada com sucesso.");
+            alert("Usuário atualizado com sucesso");
         })
         .catch((error) => {
             console.error('Erro:', error);
-            alert("Ocorreu um erro ao atualizar a marca.");
+            alert("Ocorreu um erro ao atualizar");
         });
     }
-
 
     // PESQUISAR
     // ----------------------------------------------------------------------------------------------------------------------------------
@@ -239,7 +244,7 @@
     var login = document.getElementById('login').value;
     var senha = document.getElementById('senha').value;
 
-    var url = new URL('http://localhost:3000/usuario');
+    var url = new URL('http://localhost:3000/api/usuario');
     if (codigo) url.searchParams.append('codigo', codigo);
     if (nome) url.searchParams.append('nome', nome);
     if (login) url.searchParams.append('login', login);
@@ -259,11 +264,13 @@
     })
     .then(data => {
         console.log('Success:', data);
-        alert("Categorias encontradas: " + JSON.stringify(data));
+        alert("Usuário cadastrados: \n" + JSON.stringify(data)
+        .replace(/[{}[\]"]/g, '')
+        .replace(/,/g, '\n'));
     })
     .catch((error) => {
         console.error('Erro:', error);
-        alert("Ocorreu um erro ao buscar as categorias.");
+        alert("Ocorreu um erro ao buscar");
     });
 }
 

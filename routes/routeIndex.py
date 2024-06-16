@@ -9,6 +9,7 @@ from routes.homeRoutes import homeRoutes
 from routes.loginRoutes import loginRoutes
 from routes.menuRoutes import menuRoutes
 
+
 def routeIndex(app):
     homeRoutes(app=app)
     loginRoutes(app=app)

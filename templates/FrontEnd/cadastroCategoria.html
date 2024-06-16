@@ -105,15 +105,13 @@
             <h1>Categorias</h1>
             <br><br>
             <form name="cadastro" method="post" action="">
-                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código">
-                <br>
-                <input type="text" name="descricao" id="descricao" size="20" required class="input" placeholder="Descrição">
-                <br>
-                <input type="submit" name="gravar" value="Gravar" class="button" id="btnSend">
-                <input type="submit" name="excluir" value="Excluir" class="button" id="btnDelete">
-                <input type="submit" name="alterar" value="Alterar" class="button" id="btnAlterar"><br><br>
-                <input type="submit" name="pesquisar" value="Pesquisar" class="button" id="btnPesquisar">
-            
+                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código"><br>
+                <input type="text" name="descricao" id="descricao" size="20" required class="input" placeholder="Descrição"><br>
+                
+                <input type="button" name="gravar" value="Gravar" class="button" id="btnSend">
+                <input type="button" name="excluir" value="Excluir" class="button" id="btnDelete">
+                <input type="button" name="alterar" value="Alterar" class="button" id="btnAlterar"><br><br>
+                <input type="button" name="pesquisar" value="Pesquisar" class="button" id="btnPesquisar">
             </form>
         </div>
     </div>
@@ -121,9 +119,28 @@
 </html>
 
 
-
-
 <script>
+    document.getElementById('btnSend').addEventListener('click', function(event) {
+        event.preventDefault();
+        sendUser();
+    });
+
+    document.getElementById('btnDelete').addEventListener('click', function(event) {
+        event.preventDefault();
+        deleteUser();
+    });
+
+    document.getElementById('btnAlterar').addEventListener('click', function(event) {
+        event.preventDefault();
+        updateUser();
+    });
+
+    document.getElementById('btnPesquisar').addEventListener('click', function(event) {
+        event.preventDefault();
+        searchUser();
+    });
+
+
     // ENVIAR
     // ----------------------------------------------------------------------------------------------------------------------------------
     function sendUser(){
@@ -137,7 +154,7 @@
 
         console.log("Dados a serem enviados:", data);
 
-        fetch('http://localhost:3000/categoria', {
+        fetch('http://localhost:3000/api/categoria', {
             method: 'POST',
             headers:{
                 'Content-Type' : 'application/json'
@@ -155,7 +172,6 @@
     }
 
 
-
     // DELETAR
     // ----------------------------------------------------------------------------------------------------------------------------------
     function deleteUser(){
@@ -166,7 +182,7 @@
             return;
         }
 
-        fetch(`http://localhost:3000/categoria?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/categoria?codigo=${codigo}`, {
             method: 'DELETE',
             headers:{
                 'Content-Type' : 'application/json'
@@ -189,8 +205,7 @@
         var codigo = document.getElementById('codigo').value;
         var descricao= document.getElementById('descricao').value;
 
-
-        fetch(`http://localhost:3000/categoria?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/categoria?codigo=${codigo}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -211,37 +226,34 @@
     // PESQUISAR
     // ----------------------------------------------------------------------------------------------------------------------------------
     function searchUser() {
-    var codigo = document.getElementById('codigo').value;
-    var descricao = document.getElementById('descricao').value;
+        var codigo = document.getElementById('codigo').value;
+        var descricao = document.getElementById('descricao').value;
 
-    var url = new URL('http://localhost:3000/categoria');
-    if (codigo) url.searchParams.append('codigo', codigo);
-    if (descricao) url.searchParams.append('descricao', descricao);
+        var url = new URL('http://localhost:3000/api/categoria');
+        if (codigo) url.searchParams.append('codigo', codigo);
+        if (descricao) url.searchParams.append('descricao', descricao);
 
-    fetch(url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro na resposta da rede.');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Success:', data);
-        alert("Categorias encontradas: " + JSON.stringify(data));
-    })
-    .catch((error) => {
-        console.error('Erro:', error);
-        alert("Ocorreu um erro na pesquisa");
-    });
-}
-
-    document.getElementById('btnSend').addEventListener('click', sendUser);
-    document.getElementById('btnDelete').addEventListener('click', deleteUser);
-    document.getElementById('btnAlterar').addEventListener('click', updateUser);
-    document.getElementById('btnPesquisar').addEventListener('click', searchUser);
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta da rede.');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert("Categorias cadastradas: \n" + JSON.stringify(data)
+            .replace(/[{}[\]"]/g, '')
+            .replace(/,/g, '\n'));
+        })
+        .catch((error) => {
+            console.error('Erro:', error);
+            alert("Ocorreu um erro na pesquisa");
+        });
+    }
 </script>

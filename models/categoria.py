@@ -12,4 +12,3 @@ class Categoria(db.Model):
     def __init__(self, codigo, descricao):
         self.descricao = descricao,
         self.codigo = codigo
-        

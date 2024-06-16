@@ -5,4 +5,4 @@ from controllers.usuarioControllers import usuarioHtmlController
 #Método POST: manda informações para dentro do Banco, podendo criar ou modificar tabelas
 def usuarioRoutes(app):
     app.route('/usuario', methods=['POST', 'GET', 'DELETE', 'PUT'])(usuarioHtmlController)
-    app.route('/usuario', methods=['POST', 'GET', 'DELETE', 'PUT'])(usuarioController)
+    app.route('/api/usuario', methods=['POST', 'GET', 'DELETE', 'PUT'])(usuarioController)

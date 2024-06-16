@@ -226,19 +226,19 @@ header{
 </head>
 <body>
     <header>
-        <img src="Front end/img/Logo.png" class="logo">
+        <img src="{{ url_for('static', filename='front end/img/Logo.png') }}" class="logo">
         <input type="text" name="search" id="search" size="20" class="search" placeholder="Digite o que você procura...">
         <nav class="main-nav">
             <ul class="navicons">
                 <li><a href="{{ url_for('loginHtmlController') }}"><span class="material-symbols-outlined">login</span></a></li>
                 <li><a href="{{ url_for('homeHtmlController') }}"><span class="material-symbols-outlined">home</span></a></li>
-                <li><a href=""><span class="material-symbols-outlined">favorite</span></a></li>
-                <li><a href=""><span class="material-symbols-outlined">shopping_cart</span></a></li>
+                <!-- <li><a href=""><span class="material-symbols-outlined">favorite</span></a></li>
+                <li><a href=""><span class="material-symbols-outlined">shopping_cart</span></a></li> -->
             </ul>
         </nav>
     </header>
     <main>
-        <img src="Front end/img/promocao.png" class="slidin">
+        <img src="{{ url_for('static', filename='front end/img/promocao.png') }}" class="slidin">
         <div class="positiondiv">
             <div class="filter-container">
                 <!-- Começo filtro preço-->
@@ -295,63 +295,63 @@ header{
             </div>
             <div class="products-section">
                 <div class="product-card">
-                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <img src="{{ url_for('static', filename='front end/img/cadeira.jpg') }}" alt="">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Cadeira Gamer</h3>
                     <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
                     <p class="price">R$ 999,99</p>
                 </div> 
                 <div class="product-card">
-                    <img src="Front end/produto/monitor gamer.jpg" alt="">
+                    <img src="{{ url_for('static', filename='front end/produto/monitor gamer.jpg') }}" alt="">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Monitor Gamer Sansung</h3>
                     <p>Monitor Gamer 144hz 16k de resolução pra ver tudo</p><br>
                     <p class="price">R$ 4500,01</p>
                 </div>
                 <div class="product-card">
-                    <img src="Front end/produto/headset corsair.jpg" alt="">
+                    <img src="{{ url_for('static', filename='front end/produto/headset corsair.jpg') }}" alt="">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Headset Gamer Corsair</h3>
                     <p>Headset gamer para poder escutar tudo, até sua mãe no quarto peidando</p><br>
                     <p class="price">R$ 3888,99</p>
                 </div>
                 <div class="product-card">
-                    <img src="Front end/produto/mouse razer.png" alt="" style="background-color: white;">
+                    <img src="{{ url_for('static', filename='front end/produto/mouse razer.png') }}" alt="" style="background-color: white;">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Mouse Gamer Razer</h3>
                     <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
                     <p class="price">R$ 999,99</p>
                 </div>
                 <div class="product-card">
-                    <img src="Front end/produto/mousepad logitec.jpg" alt="">
+                    <img src="{{ url_for('static', filename='front end/produto/mousepad logitec.jpg') }}" alt="">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Mousepad Logitech</h3>
                     <p>Mousepad Logitech para arrasta ate o dedo no cu nele</p><br>
                     <p class="price">R$ 200,00</p>
                 </div>
                 <div class="product-card">
-                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <img src="{{ url_for('static', filename='front end/img/cadeira.jpg') }}" alt="">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Cadeira Gamer</h3>
                     <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
                     <p class="price">R$ 999,99</p>
                 </div>
                 <div class="product-card">
-                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <img src="{{ url_for('static', filename='front end/img/cadeira.jpg') }}" alt="">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Cadeira Gamer</h3>
                     <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
                     <p class="price">R$ 999,99</p>
                 </div>
                 <div class="product-card">
-                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <img src="{{ url_for('static', filename='front end/img/cadeira.jpg') }}" alt="">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Cadeira Gamer</h3>
                     <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
                     <p class="price">R$ 999,99</p>
                 </div>
                 <div class="product-card">
-                    <img src="Front end/img/cadeira.jpg" alt="">
+                    <img src="{{ url_for('static', filename='front end/img/cadeira.jpg') }}" alt="">
                     <span class="material-symbols-outlined">heart_plus</span>
                     <h3>Cadeira Gamer</h3>
                     <p>Cadeira Gamer ergonomica, confortavel e da mais fps no bagulho tlg</p><br>
@@ -361,7 +361,8 @@ header{
             </div>  
         </div>
 
-        <script>function some(el) {
+        <script>
+        function some(el) {
             var btn = document.getElementById(el);
             var border = document.getElementById("containerteste");
             var border1 = document.getElementById("containerteste1");
@@ -379,11 +380,9 @@ header{
                 border1.style.borderBottom = '2px solid #7c0109';
                 border2.style.borderBottom = '2px solid #7c0109';
             }
-        }</script>
+        }
+        </script>
 
     </main>
-    
-
-
 </body>
 </html>

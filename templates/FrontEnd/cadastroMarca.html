@@ -105,15 +105,13 @@
             <h1>Marca</h1>
             <br><br>
             <form name="cadastro" method="post" action="">
-                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código">
-                <br>
-                <input type="text" name="nome" id="nome" size="20" required class="input" placeholder="Nome">
-                <br>
+                <input type="text" name="codigo" id="codigo" size="20" required class="input" placeholder="Código"><br>
+                <input type="text" name="nome" id="nome" size="20" required class="input" placeholder="Nome"><br>
+                
                 <input type="submit" name="gravar" value="Gravar" class="button" id="btnSend">
                 <input type="submit" name="excluir" value="Excluir" class="button" id="btnDelete">
                 <input type="submit" name="alterar" value="Alterar" class="button" id="btnAlterar"><br><br>
                 <input type="submit" name="pesquisar" value="Pesquisar" class="button" id="btnPesquisar">
-            
             </form>
         </div>
     </div>
@@ -134,7 +132,7 @@
 
         console.log("Dados a serem enviados:", data);
 
-        fetch('http://localhost:3000/marca', {
+        fetch('http://localhost:3000/api/marca', {
             method: 'POST',
             headers:{
                 'Content-Type' : 'application/json'
@@ -163,7 +161,7 @@
             return;
         }
 
-        fetch(`http://localhost:3000/marca?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/marca?codigo=${codigo}`, {
             method: 'DELETE',
             headers:{
                 'Content-Type' : 'application/json'
@@ -187,7 +185,7 @@
         var nome = document.getElementById('nome').value;
 
 
-        fetch(`http://localhost:3000/marca?codigo=${codigo}`, {
+        fetch(`http://localhost:3000/api/marca?codigo=${codigo}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -211,7 +209,7 @@
     var codigo = document.getElementById('codigo').value;
     var nome = document.getElementById('nome').value;
 
-    var url = new URL('http://localhost:3000/marca');
+    var url = new URL('http://localhost:3000/api/marca');
     if (codigo) url.searchParams.append('codigo', codigo);
     if (nome) url.searchParams.append('nome', nome);
 
@@ -229,7 +227,9 @@
     })
     .then(data => {
         console.log('Success:', data);
-        alert("Categorias encontradas: " + JSON.stringify(data));
+        alert("Marcas encontradas: \n" + JSON.stringify(data)
+        .replace(/[{}[\]"]/g, '')
+        .replace(/,/g, '\n'));
     })
     .catch((error) => {
         console.error('Erro:', error);

@@ -1,4 +1,4 @@
 from controllers.menuControllers import menuHtmlController
 
 def menuRoutes(app):
-    app.route('/MenuCadastro', methods=['GET', 'POST'])(menuHtmlController)
+    app.route('/resultadoPesquisaProduto', methods=['GET', 'POST'])(menuHtmlController)

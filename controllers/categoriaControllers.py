@@ -9,7 +9,6 @@ def categoriaHtmlController():
          return render_template('FrontEnd/cadastroCategoria.html')
     return render_template('FrontEnd/cadastroCategoria.html')
 
-
 #Essa função contém o CRUD completo da tabela "categoria"
 def categoriaController():
 
@@ -26,7 +25,6 @@ def categoriaController():
             except Exception as e:
                 return 'A categoria não foi criada {}'.format(str(e)), 405
     
-
 
     #GET
     # ----------------------------------------------------------------------------------------------------------------------------------
@@ -45,9 +43,8 @@ def categoriaController():
             results = [{'codigo': cat.codigo, 'descricao': cat.descricao} for cat in categorias]
             return jsonify(results), 200
         except Exception as e:
-            return 'Erro ao buscar categorias: {}'.format(str(e)), 405
+            return 'Erro ao buscar pela categoria: {}'.format(str(e)), 405
             
-
 
     # PUT
     # ----------------------------------------------------------------------------------------------------------------------------------
@@ -72,7 +69,6 @@ def categoriaController():
               }
           except Exception as e:
               return 'Não foi possível atualizar a categoria. ERRO:{}'.format(str(e)),405
-
 
 
     # DELETE

@@ -27,7 +27,6 @@ def marcaController():
                 return 'Não foi possível criar uma nova marca{}'.format(str(e)), 405
     
 
-
     #GET
     # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'GET':
@@ -45,9 +44,8 @@ def marcaController():
             results = [{'codigo': cat.codigo, 'nome': cat.nome} for cat in marca]
             return jsonify(results), 200
         except Exception as e:
-            return 'Erro ao buscar categorias: {}'.format(str(e)), 405
+            return 'Erro ao buscar pelas marcas: {}'.format(str(e)), 405
     
-
 
     # PUT
     # ----------------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +57,7 @@ def marcaController():
 
               marca = Marca.query.get(id_marca)
               if marca is None: #Caso o número seja inválido, um erro é informado
-                  return {'error': 'marca não encontrada'}, 404
+                  return {'error': 'Marca não encontrada'}, 404
               print(data)
               #Se não, os campos de codigo e descrição são atualizados com novas informações digitadas pelo usuário
               marca.nome = data.get('nome', marca.nome)
@@ -73,7 +71,6 @@ def marcaController():
               return 'Não foi possível atualizar a Marca. ERRO:{}'.format(str(e)),405
 
 
-
     # DELETE
     # ----------------------------------------------------------------------------------------------------------------------------------
     elif request.method == 'DELETE':
@@ -81,7 +78,7 @@ def marcaController():
             data = int(request.args.to_dict().get('codigo'))
             marca = Marca .query.get(data)
             if marca is None: 
-                return {'error': 'Classificação não encontrada'}, 404
+                return {'error': 'Marca não encontrada'}, 404
             db.session.delete(marca)
             db.session.commit()
             return 'Marca deletada com sucesso', 200
