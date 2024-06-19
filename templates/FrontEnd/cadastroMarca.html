@@ -143,10 +143,6 @@
             console.log('Success:', data);
             alert("Marca cadastrada com sucesso.");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao enviar");
-        });
     }
 
 
@@ -171,10 +167,6 @@
             console.log('Success:', data);
             alert("Marca excluída com sucesso");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao excluir");
-        });
     }
 
 
@@ -196,10 +188,6 @@
             console.log('Success:', data);
             alert("Marca atualizada com sucesso");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao atualizar");
-        });
     }
 
 
@@ -231,10 +219,6 @@
         .replace(/[{}[\]"]/g, '')
         .replace(/,/g, '\n'));
     })
-    .catch((error) => {
-        console.error('Erro:', error);
-        alert("Ocorreu um erro ao pesquisar");
-    });
 }
 
     document.getElementById('btnSend').addEventListener('click', sendUser);

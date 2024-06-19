@@ -157,10 +157,6 @@
             console.log('Success:', data);
             alert("Usuário enviado com sucesso.");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao enviar");
-        });
     }
 
 
@@ -191,10 +187,6 @@
             console.log('Success:', data);
             alert("Usuário excluído com sucesso.");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao excluir");
-        });
     }
 
 
@@ -230,10 +222,6 @@
             console.log('Success:', data);
             alert("Usuário atualizado com sucesso");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao atualizar");
-        });
     }
 
     // PESQUISAR
@@ -268,10 +256,6 @@
         .replace(/[{}[\]"]/g, '')
         .replace(/,/g, '\n'));
     })
-    .catch((error) => {
-        console.error('Erro:', error);
-        alert("Ocorreu um erro ao buscar");
-    });
 }
 
     document.getElementById('btnSend').addEventListener('click', sendUser);

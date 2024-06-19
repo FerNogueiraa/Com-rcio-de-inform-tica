@@ -109,7 +109,7 @@
                 <input type="text" name="codclassificacao" id="codclassificacao" size="20" required class="input" placeholder="Cod Classificação"><br>
                 <input type="text" name="codmarca" id="codmarca" size="20" required class="input" placeholder="Cod Marca"><br>
                 <input type="text" name="preco" id="preco" size="20" required class="input" placeholder="Preço"><br>
-                <input type="file" name="foto1" id="foto1" size="20" required class="input" placeholder="Imagem do Produto"><br><br>
+                <input type="text" name="foto1" id="foto1" size="20" required class="input" placeholder="Imagem do Produto"><br><br>
 
                 <input type="submit" name="gravar" value="Gravar" class="button" id="btnSend">
                 <input type="submit" name="excluir" value="Excluir" class="button" id="btnDelete">
@@ -163,10 +163,6 @@
             console.log('Success:', data);
             alert("Produto cadastrado com sucesso.");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao enviar");
-        });
     }
 
 
@@ -196,10 +192,6 @@
             console.log('Success:', data);
             alert("Produto excluído com sucesso.");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao excluir");
-        });
     }
 
 
@@ -239,10 +231,6 @@
             console.log('Success:', data);
             alert("Produto atualizado com sucesso.");
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao atualizar");
-        });
     }
 
 
@@ -284,10 +272,6 @@
             .replace(/[{}[\]"]/g, '')
             .replace(/,/g, '\n'));
         })
-        .catch((error) => {
-            console.error('Erro:', error);
-            alert("Ocorreu um erro ao buscar");
-        });
     }
 
     document.getElementById('btnSend').addEventListener('click', sendUser);
