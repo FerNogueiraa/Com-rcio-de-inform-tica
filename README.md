@@ -17,3 +17,5 @@ Werkzeug==3.0.2
 
 O código apresenta dois branches, um para o BackEnd, e outro para o FrontEnd.
 Realizado nas aulas de Programação Orientada ao Objeto (POO) do curso técnico de Informática do colégio Satc.
+
+Link do Trello: https://trello.com/b/t9CACEuO/projeto-flask
